@@ -41,12 +41,12 @@ gen_unique_key() {
 }
 
 get_client_ip() {
-	client_ip=$( netstat -putan | awk '/:22 / && / ESTABELECIDA / {split($4, result, ":"); print result[1]}' ) 
+	client_ip=$( netstat -putan | awk '/:22 / && / ESTABLISHED / {split($4, result, ":"); print result[1]}' ) 
 	echo $client_ip
 }
 
 get_auth_user() {
-	client_auth_user=$( netstat -putan | awk '/:22 / && / ESTABELECIDA / {split($8,result,":"); print result[1]}' )
+	client_auth_user=$( netstat -putan | awk '/:22 / && / ESTABLISHED / {split($8,result,":"); print result[1]}' )
 	echo $client_auth_user
 }
 
@@ -134,7 +134,7 @@ datasource_monitor() {
 				done
 
 			#set PYTHONPATH for test proposal
-			export PYTHONPATH="$PYTHONPATH:/opt/projetos/Django/logger_framework/:/opt/projetos/Django/logger_framework/logger_multi_modules/:/opt/projetos/Django/rpa_datasources/addons_community/pid-3.0.4"
+			export PYTHONPATH="$PYTHONPATH:$PWD/logger_framework/:$PWD/logger_framework/logger_multi_modules/:$PWD/rpa_datasources/addons_community/pid-3.0.4"
 			python "../main.py";
 		done
 }
